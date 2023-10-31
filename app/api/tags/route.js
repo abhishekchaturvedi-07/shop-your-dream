@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
-import dbConnect from "@/utils/dbConnect";
 import Tag from "@/models/tag";
+import dbConnect from "@/utils/dbConnect";
 
 export async function GET(req) {
   await dbConnect();
 
   try {
     const tags = await Tag.find({})
-      .populate("parent", "name")
+      .populate("parentCategory", "name")
       .sort({ createdAt: "-1" });
 
     return NextResponse.json(tags, { status: 200 });

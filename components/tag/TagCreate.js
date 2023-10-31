@@ -53,12 +53,13 @@ export default function AdminTagCreate() {
         >
           <option value="">Select one</option>
           {categories.length > 0 &&
-            categories.map((c) => (
+            categories?.map((c) => (
               <option
                 key={c._id}
                 value={c._id}
                 selected={
-                  c._id === updatingTag?.parent || c._id === parentCategory
+                  c?._id === updatingTag?.parentCategory ||
+                  c._id === parentCategory
                 }
               >
                 {c.name}
