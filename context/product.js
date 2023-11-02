@@ -208,7 +208,7 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-  const fetchProducts = async (page) => {
+  const fetchProducts = async (page = 1) => {
     try {
       const response = await fetch(`${process.env.API}/product?page=${page}`, {
         method: "GET",
@@ -252,7 +252,8 @@ export const ProductProvider = ({ children }) => {
       const updatedProduct = await response.json();
       toast.success(`Product "${updatedProduct?.title}" updated!`);
       // router.push("/dashboard/admin/products");
-      router.back();
+      // router.back();
+      window.location.href = "/dashboard/admin/products";
     } catch (err) {
       console.log("err => ", err);
       toast.error("An error occurred while updating the product");

@@ -1,7 +1,8 @@
-import Category from "@/models/category";
-import Tag from "@/models/tag";
+import Category from "@/models/category"; // Next js 13 load issue - no showing in display in homepage
+import Tag from "@/models/tag"; // Next js 13 load issue
 import mongoose from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
+import user from "@/models/user"; // Next js 13 load issue
 const ratingSchema = new mongoose.Schema(
   {
     rating: {

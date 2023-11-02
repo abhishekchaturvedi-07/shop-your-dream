@@ -253,7 +253,7 @@ export default function ProductCreate() {
         {updatingProduct && (
           <>
             <button
-              className={`btn bg-danger text-light`}
+              className={`btn bg-danger btn-raised`}
               onClick={(e) => {
                 e.preventDefault();
                 deleteProduct();
@@ -263,7 +263,7 @@ export default function ProductCreate() {
             </button>
 
             <button
-              className="btn bg-success text-light"
+              className="btn bg-warning btn-raised"
               onClick={() => window.location.reload()}
             >
               Clear

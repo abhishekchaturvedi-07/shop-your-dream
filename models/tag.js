@@ -1,3 +1,4 @@
+import Category from "@/models/category"; // Next js 13 load issue - no showing in display in homepage
 import mongoose from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 const tagSchema = new mongoose.Schema(

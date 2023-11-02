@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const config = require("./config");
 const nextConfig = {
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com" }],
+  },
   env: {
     DB_URL: config.DB_URL,
     API: config.API,
