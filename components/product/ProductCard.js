@@ -1,11 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProductRating from "@/components/product/ProductRating";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+// import AddToCart from "@/components/product/AddToCart";
+
 dayjs.extend(relativeTime);
+
 export default function ({ product }) {
   return (
-    <div key={product?._id} className="card my-3   ">
+    <div key={product?._id} className="card my-3">
       <div style={{ height: "200px", overflow: "hidden" }}>
         <Image
           src={product?.images?.[0]?.secure_url || "/images/default.jpeg"}
@@ -15,8 +19,18 @@ export default function ({ product }) {
           alt={product?.title}
         />
       </div>
+
       <div className="card-body">
-        <h5 className="card-title">{product?.title}</h5>
+        <Link href={`/product/${product?.slug}`}>
+          <h5 className="card-title">
+            <strong>${product?.price?.toFixed(2)}</strong> {product?.title}
+          </h5>
+        </Link>
+        {product?.previousPrice > product?.price && (
+          <h5 className="card-title text-danger">
+            🛍️ <del>${product?.previousPrice?.toFixed(2)}</del>
+          </h5>
+        )}
         <div
           dangerouslySetInnerHTML={{
             __html:
@@ -26,20 +40,24 @@ export default function ({ product }) {
           }}
         />
       </div>
-      {/* before accessing category and tags, make sure .populate() is
-used in api routes and ref: 'Category' models are imported in `Product`
-model */}
+      {/* before accessing category and tags, make sure .populate() is used in api routes and ref: 'Category' models are imported in `Product` model */}
       <div className="card-footer d-flex justify-content-between">
         <small>Category: {product?.category?.name}</small>
         <small>Tags: {product?.tags?.map((t) => t?.name).join(" ")}</small>
       </div>
+
       <div className="card-footer d-flex justify-content-between">
-        <small>❤Likes</small>
+        <small>❤️ Likes</small>
         <small>Posted {dayjs(product?.createdAt).fromNow()}</small>
       </div>
-      <div className="card-footer d-flex justify-content-between">
+
+      <div className="card-footer d-flex justify-content-between align-items-center">
         <small>Brand: {product?.brand}</small>
-        <small>🌟 Stars</small>
+        <ProductRating product={product} leaveARating={false} />
+      </div>
+
+      <div className="card-footer">
+        ADDTOCART{/* <AddToCart product={product} /> */}
       </div>
     </div>
   );
